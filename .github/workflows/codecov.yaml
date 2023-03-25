@@ -1,0 +1,23 @@
+name: Coverage
+
+on:
+  release:
+    types: ["published", "unpublished", "prereleased"]
+
+permissions: read-all
+
+jobs:
+  coverage:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: "1.20"
+
+      - name: Test
+        run: go test -coverpkg ./... -coverprofile coverage.txt -covermode atomic ./...
+      
+      - uses: codecov/codecov-action@v3
