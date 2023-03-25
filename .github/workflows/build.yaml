@@ -24,7 +24,7 @@ jobs:
   versioning:
     permissions:
       contents: write
-    needs: build
+    needs: test
     runs-on:
       ubuntu-latest
     outputs:
